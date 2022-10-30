@@ -1,42 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios'
 import styled from 'styled-components'
+import { useRouter } from 'next/router';
 
 const LoginForm = () => {
-    const[username, setUsername] = useState("")
-    const[password, setPassword] = useState("")
-    const[isAuthenticated, setIsAuthenticated] = useState(false)
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const router = useRouter()
 
     const handleInput = () => {
         const data = {
             username: username,
             password: password
         }
-        axios.post("/api/authenticate",data).then((res)=>{
-            console.log(res.data)
-            if(res.data.status == 200){
+        axios.post("/api/authenticate", data).then((res) => {
+            console.log(res.data.response)
+            if (res.data.response == "success") {
                 setIsAuthenticated(true)
+                router.push("/dashboard")
             }
-        }).catch(e=>{
+        }).catch(e => {
             console.log("login failed")
         })
     }
-    return(
+    return (
         <>
             <MainContainer>
                 <H3Label>Login</H3Label>
                 <InputContainer>
                     <UsernameContainer>
                         <UsernameLabel>Username</UsernameLabel>
-                        <UsernameInput onChange={e=>setUsername(e.target.value)}/>
+                        <UsernameInput onChange={e => setUsername(e.target.value)} />
                     </UsernameContainer>
                     <PasswordContainer>
                         <PasswordLabel>Password</PasswordLabel>
-                        <PasswordInput type={'password'} onChange={e=>setPassword(e.target.value)}/>
+                        <PasswordInput type={'password'} onChange={e => setPassword(e.target.value)} />
                     </PasswordContainer>
                 </InputContainer>
                 <ButtonContainer>
-                    <LoginButton onClick={()=>{handleInput()}}>Login</LoginButton>
+                    <LoginButton onClick={() => { handleInput() }}>Login</LoginButton>
                     <RegisterButton>Register</RegisterButton>
                 </ButtonContainer>
             </MainContainer>
@@ -143,3 +146,4 @@ height: 100%;
 margin: 0px 0px 0px 10px;
 
 `
+
