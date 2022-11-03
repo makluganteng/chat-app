@@ -37,3 +37,5 @@ replace example/authenticate => ../backend/Authenticate
 replace example/getEnv => ../backend/GetEnv
 
 replace example/database => ../backend/Database
+
+replace example/models => ../backend/models
