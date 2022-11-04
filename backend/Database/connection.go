@@ -3,9 +3,9 @@ package database
 import (
 	"example/getEnv"
 	"example/models"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"os"
 )
 
 var DB *gorm.DB
