@@ -1,13 +1,14 @@
 import axios from 'axios'
 
 
+
 export default async (req, res) => {
     if (req.method === 'POST') {
         const username = req.body.username;
         const password = req.body.password;
       try {
         const createResponse = await axios.post(
-          'http://localhost:8080/authenticate',
+          'http://localhost:8080/register',
           {
             username: username,
             password: password,
@@ -24,6 +25,7 @@ export default async (req, res) => {
       } catch (error) {
         res.statusCode = 500
   
+        // Handles Invalid API key error
         if (error.response.status === 403) {
           res.statusCode = 403
         }

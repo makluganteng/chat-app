@@ -1,10 +1,12 @@
 import styled from 'styled-components';
-import LoginForm from './LoginForm';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+
+import axios from 'axios';
 const RegisterForm = () => {
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
+    const [username, setUsername] = useState<String>("")
+    const [password, setPassword] = useState<String>("")
+    const [error, setError] = useState<Boolean>(false)
     const router = useRouter()
 
     const directLogin = () => {
@@ -12,21 +14,33 @@ const RegisterForm = () => {
     }
 
     const handleInput = () => {
-        const data = {
+        const data: Object = {
             username: username,
             password: password
         }
+
+        axios.post("/api/register",data).then((res)=>{
+            router.push("/dashboard")
+        }).catch(e=>{
+            setError(true)
+        })
     }
     return (
         <>
             <MainContainer>
-                <H3Label>Login</H3Label>
+                <H3Label>Register</H3Label>
                 <InputContainer>
                     <UsernameContainer>
+                        {
+                        error ? <ErrorLabel>Invalid Username</ErrorLabel> : <></>
+                        }
                         <UsernameLabel>Username</UsernameLabel>
                         <UsernameInput onChange={e => setUsername(e.target.value)} />
                     </UsernameContainer>
                     <PasswordContainer>
+                        {
+                        error ? <ErrorLabel>Invalid Password</ErrorLabel> : <></>
+                        }
                         <PasswordLabel>Password</PasswordLabel>
                         <PasswordInput type={'password'} onChange={e => setPassword(e.target.value)} />
                     </PasswordContainer>
@@ -40,7 +54,7 @@ const RegisterForm = () => {
     )
 }
 
-export default LoginForm;
+export default RegisterForm;
 
 const MainContainer = styled.div`
 height: 520px;
@@ -91,6 +105,14 @@ display: block;
 margin-top: 30px;
 font-size: 16px;
 font-weight: 500;
+`
+
+const ErrorLabel = styled.label`
+display: block;
+margin-top: 30px;
+font-size: 16px;
+font-weight: 500;
+color: red;
 `
 
 const UsernameInput = styled.input`

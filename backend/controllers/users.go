@@ -19,20 +19,17 @@ func GetAuthenticate(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	data := AuthBody{Username: input.Username, Password: input.Password}
-	if data.Username == "" || data.Password == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Parameters can't be empty"})
+	var user models.User
+	if err := database.DB.Where("username = ?", input.Username).First(&user).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
-	}
-	if data.Username == "admin" && data.Password == "admin" {
+	} else {
 		c.JSON(http.StatusOK, gin.H{
 			"response": "success",
 		})
 		return
-	} else {
-		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "unauthorized"})
-		return
 	}
+
 }
 
 func Register(c *gin.Context) {
