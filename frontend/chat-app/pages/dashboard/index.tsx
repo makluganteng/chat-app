@@ -1,12 +1,11 @@
 import { NextPage } from "next"
 import styled from 'styled-components'
-import LoginForm from "../../component/form/LoginForm"
-import ChatSide from "../../component/sidebar/ChatSide"
+import Layout from "../../component/layout"
 
 const Dashboard: NextPage = () => {
     return (
         <MainContainer>
-            <ChatSide />
+            <Layout/>
         </MainContainer>
     )
 }

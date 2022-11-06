@@ -65,7 +65,7 @@ const MainContainer = styled.div`
 const InboxContainer = styled.div`
     background-color: #6B728E;
     border: 2px solid white;
-    border-radius: 20px;
+    border-radius: 15px;
     width: 300px;
     padding: 10px;
     margin: 0px 10px 0px 10px;
@@ -73,9 +73,14 @@ const InboxContainer = styled.div`
 
 const Inbox = styled.div`
 border: 2px solid black;
+border-radius: 15px;
 padding: 10px;
 margin: 0px 0px 10px 0px;
 display: flex;
+transition: 0.3s ease-in-out;
+&:hover {
+    transform: scale(1.04);
+}
 `
 const Pfp = styled.div`
 display: flex;
