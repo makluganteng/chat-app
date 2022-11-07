@@ -13,5 +13,4 @@ export default Dashboard;
 
 const MainContainer = styled.div`
 
-
 `

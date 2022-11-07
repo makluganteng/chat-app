@@ -25,7 +25,6 @@ const ChatSide = () => {
     
 
     return(
-    <>
         <MainContainer>
             <InboxContainer>
                 {friends?.map((id,key)=>{
@@ -46,7 +45,6 @@ const ChatSide = () => {
                 <Logout>Logout</Logout>
             </Footing>
         </MainContainer>
-    </>
     )
 }
 
@@ -55,11 +53,12 @@ export default ChatSide
 const MainContainer = styled.div`
     background-color: #474E68;
     width: 350px;
-    height: 100vh;
+    height: 109.5vh;
     padding: 10px 0px 0px 0px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    float: left;
 `
 
 const InboxContainer = styled.div`
