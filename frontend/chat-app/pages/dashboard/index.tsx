@@ -12,5 +12,6 @@ const Dashboard: NextPage = () => {
 export default Dashboard;
 
 const MainContainer = styled.div`
+    
 
 `

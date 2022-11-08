@@ -49,22 +49,66 @@ const Chat = () => {
                         dummyChat.map((value,key)=>{
                             if(value.ownText){
                                 return (
-                                    <ChatBubbleLeft key={key}>{value.text}</ChatBubbleLeft>
+                                    <ChatBubbleLeftContainer key={key}>
+                                        <ChatBubbleLeft key={key}>{value.text}</ChatBubbleLeft>
+                                    </ChatBubbleLeftContainer>
                                 )
                             }else{
                                 return (
-                                    <ChatBubbleRight key={key}>{value.text}</ChatBubbleRight>
+                                    <ChatBubbleRightContainer key={key}>
+                                        <ChatBubbleRight key={key}>{value.text}</ChatBubbleRight>
+                                    </ChatBubbleRightContainer>
                                 )
                             }
                         })
                     }
+                
                 </ChatLayout>
+                <MessageContainer>
+                    <SendBox />
+                    <SendButton>
+                        Send
+                    </SendButton>
+                </MessageContainer>
             </ChatContainer>
         </MainContainer>
         </>
     )
 
 }
+
+const SendButton = styled.button`
+font-size: 30px;
+padding 5px;
+
+`
+
+const MessageContainer = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+width: 1000px;
+`
+
+const SendBox = styled.input`
+width:100%; 
+height: 40px;
+font-size: 20px;
+`
+
+const ChatBubbleLeftContainer = styled.div`
+    padding : 10px;
+    display:flex;
+    justify-content: flex-start;
+    
+`
+
+const ChatBubbleRightContainer = styled.div`
+    padding : 10px;
+    display:flex;
+    justify-content: flex-end;
+    
+`
 
 const Pfp = styled.div`
     display: flex;
@@ -77,7 +121,7 @@ const Pfp = styled.div`
 const HeaderReceptiant = styled.div`
     margin: 0px 0px 0px 0px;
     display:flex;
-    background-color: #474e68; 
+    background-color: #50577A; 
     
 `
 
@@ -111,8 +155,10 @@ background-color: transparent;
 
 const ChatContainer = styled.div`
 width: 100%;
-height: 100vh;
+height: 102vh;
 display: flex;
+flex-direction: column;
+background-image: url("https://w0.peakpx.com/wallpaper/818/148/HD-wallpaper-whatsapp-background-cool-dark-green-new-theme-whatsapp.jpg");
 justify-content: center;
 align-items: center;
 
@@ -120,7 +166,7 @@ align-items: center;
 const ChatLayout = styled.div`
     width: 1000px;
     height: 100vh;
-    background-color: black;
+    background-color: transparent;
 `
 
 const ChatBubbleRight = styled.div`
@@ -128,13 +174,19 @@ const ChatBubbleRight = styled.div`
     border: 2px solid white;
     border-radius: 15px;
     color: white;
+    padding: 10px;
+    background-color: grey;
+    display: flex; 
+    justify-content: flex-end;
 `
 
 const ChatBubbleLeft = styled.div`
     width: 200px;
     border: 2px solid white;
     border-radius: 15px;
+    padding: 10px;
     color: white;
+    background-color: grey;
 
 `
 
