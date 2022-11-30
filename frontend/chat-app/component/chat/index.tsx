@@ -1,7 +1,19 @@
 import styled from "styled-components"
 import Image from "next/image"
+import { useEffect, useState } from "react"
+import { io } from "socket.io-client";
 
 const Chat = () => {
+    const [text,setText] = useState<string>('');
+    const socket = io("http://localhost:3030")
+    useEffect(() => {
+      socket.on('msgToClient',(msg)=>{
+        console.log(`recv: ${msg}`)
+        dummyChat.push(msg)
+      })
+    
+    }, [socket])
+    
     const dummyChat = [{
         "sender" : "AnakBangsat",
         "text": "Lagi ngapain cok",
@@ -26,6 +38,13 @@ const Chat = () => {
         "time" : "22:04",
         "ownText": false
     }]
+    const getText = (event: React.ChangeEvent<HTMLInputElement>) =>{
+        setText(event.target.value)
+    }
+    const sendMessage = () => {
+        socket.emit('msgToServer',text)
+        setText('');
+    }
 
     return(
         <> 
@@ -65,8 +84,8 @@ const Chat = () => {
                 
                 </ChatLayout>
                 <MessageContainer>
-                    <SendBox />
-                    <SendButton>
+                    <SendBox onChange={getText}/>
+                    <SendButton onClick={sendMessage}>
                         Send
                     </SendButton>
                 </MessageContainer>

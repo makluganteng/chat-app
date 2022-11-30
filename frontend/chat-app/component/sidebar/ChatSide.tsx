@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import styled from "styled-components"
 
+
 const ChatSide = () => {
     const [friends, setFriends] = useState<Array<Object>>()
 
